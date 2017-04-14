@@ -1,0 +1,12 @@
+--- install/geant4.10.0.p02-source/source/processes/optical/src/G4OpBoundaryProcess.cc	2017-04-14 11:35:39.967151673 -0600
++++ install/geant4.10.0.p02-source/source/processes/optical/src/G4OpBoundaryProcess_new.cc	2017-04-14 12:09:39.939222562 -0600
+@@ -1080,7 +1080,8 @@
+ 	      Done = (NewMomentum * theGlobalNormal <= 0.0);
+ 	   } 
+ 	   else {
+-	      Done = (NewMomentum * theGlobalNormal >= 0.0);
++	      Done = (NewMomentum * theGlobalNormal >= -kCarTolerance);
++	      // JPmod - Following Nuno's suggestion to add a tolerance
+ 	   }
+ 
+ 	} while (!Done);

@@ -66,7 +66,13 @@ class Geant4Post5(localpackage.LocalPackage):
         cmake_command = "cmake"
         if self._dependency_paths["cmake-2.8.12"] is not None: # Special cmake installed
             cmake_command = "%s/bin/cmake" % self._dependency_paths["cmake-2.8.12"]
+
+        print source_path
+        os.system("patch -p0 < patches/G4OpBoundaryProcess.patch")
+
         self._system.configure_command(cmake_command, cmake_opts, self.get_install_path(), env, config_type="geant4")
+
+
         self._system.execute_command("make", [], self.get_install_path(), env)
         self._system.execute_command("make", ['install'], self.get_install_path(), env)
         if self._system.get_install_mode() == installmode.Grid:
